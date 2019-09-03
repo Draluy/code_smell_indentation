@@ -17,7 +17,6 @@ public class ArrayUtils {
         return IntStream.range(0, logRequestors.length).boxed()
                 .filter(i -> logRequestors[i] != null)
                 .filter(i -> logRequestors[i].getClass().equals(alclass))
-
                 .collect(Collectors.toList());
     }
 }

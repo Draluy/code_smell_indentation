@@ -19,7 +19,7 @@ public class Example6 extends SecondExample{
 
     private void doStuff(JSONObject json, String key, int i) {
         if (recommendations.get(key) == null)
-            recommendations.put(key, new ArrayList());
+            recommendations.put(key, new ArrayList<>());
         recommendations.get(key).add(json.getJSONArray(key).get(i).toString());
     }
 }

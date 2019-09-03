@@ -21,12 +21,12 @@ public class Example8 extends SecondExample {
                 .collect(Collectors.toMap(Function.identity(), json::getJSONArray));
 
         //second step, iterate over the recommendations
-        recommendationsMap.forEach((key, recommendations) -> addRecommendations(key, recommendations));
+        recommendationsMap.forEach(this::addRecommendations);
     }
 
     private void addRecommendations(String key, JSONArray json) {
         if (recommendations.get(key) == null)
-            recommendations.put(key, new ArrayList());
+            recommendations.put(key, new ArrayList<>());
 
         List<String> recommendations = (List<String>) (List<?>) json.toList();
         this.recommendations.get(key).addAll(recommendations);
