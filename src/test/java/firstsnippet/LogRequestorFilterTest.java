@@ -21,7 +21,9 @@ public class LogRequestorFilterTest {
         return Arrays.asList(new Example1(),
                 new Example2(),
                 new Example3(),
-                new Example4());
+                new Example3bis(),
+                new Example4(),
+                new Example4bis());
     }
 
     public LogRequestorFilterTest(LogRequestorFilter filter) {

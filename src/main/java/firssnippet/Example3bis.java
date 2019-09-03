@@ -2,19 +2,15 @@ package firssnippet;
 
 import firssnippet.logrequestor.LogRequestor;
 
-import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class Example3 implements LogRequestorFilter {
+public class Example3bis implements LogRequestorFilter {
     public LogRequestor[] process(LogRequestor[] logRequestors, Class alclass) {
-        for (int i = 0; i < logRequestors.length; i++) {
-            LogRequestor curentLogRequestor = logRequestors[i];
-            if (isOfClass(curentLogRequestor, alclass)
-                    && !isLastValue(logRequestors, i)
-                    && isOfClass(logRequestors[i + 1], alclass)) {
-                logRequestors[i + 1] = null;
-            }
-        }
+        IntStream.range(0, logRequestors.length)
+                .filter(i -> isOfClass(logRequestors[i], alclass))
+                .filter(i -> !isLastValue(logRequestors, i))
+                .filter(i -> isOfClass(logRequestors[i + 1], alclass))
+                .forEach(i -> logRequestors[i + 1] = null);
 
         return logRequestors;
     }

@@ -17,22 +17,18 @@ public class Example8 extends SecondExample {
 
         //first step, populate the beer names and create the tuples
         Map<String, JSONArray> recommendationsMap = Streams.stream(json.keys())
-                .map(key -> {
-                    beerNames.add(key);
-                    return key;
-                })
-                .collect(Collectors.toMap(Function.identity(), str -> json.getJSONArray(str)));
+                .peek(beerNames::add)
+                .collect(Collectors.toMap(Function.identity(), json::getJSONArray));
 
         //second step, iterate over the recommendations
-        recommendationsMap.forEach((key, value) -> {
-            addRecommendations(value, key);
-        });
+        recommendationsMap.forEach((key, recommendations) -> addRecommendations(key, recommendations));
     }
 
-    private void addRecommendations(JSONArray json, String key) {
+    private void addRecommendations(String key, JSONArray json) {
         if (recommendations.get(key) == null)
             recommendations.put(key, new ArrayList());
-        List<String> recommendations = (List<String>)(List<?>)json.toList();
+
+        List<String> recommendations = (List<String>) (List<?>) json.toList();
         this.recommendations.get(key).addAll(recommendations);
     }
 }
